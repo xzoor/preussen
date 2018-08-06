@@ -1,0 +1,35 @@
+# To get started with security, check out the documentation:
+# https://symfony.com/doc/current/security.html
+security:
+
+    # https://symfony.com/doc/current/security.html#b-configuring-how-users-are-loaded
+
+    encoders:
+        AppBundle\Entity\User:
+            algorithm: bcrypt
+            cost:      15
+
+    providers:
+        my_provider:
+          entity:
+             class: AppBundle:User
+             property: username
+
+    firewalls:
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+        main:
+            anonymous: ~
+            form_login:
+                login_path: login
+                check_path: login
+            provider: my_provider
+
+            remember_me:
+                secret:   '%secret%'
+                lifetime: 604800 # 1 week in seconds
+                path:     /
+            logout:
+                path: /logout
+                target: /login
