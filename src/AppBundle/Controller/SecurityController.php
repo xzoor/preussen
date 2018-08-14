@@ -14,6 +14,7 @@ class SecurityController extends Controller
 {
     /**
      * @Route("/login", name="login")
+     *
      */
     public function loginAction(Request $request, AuthenticationUtils $authenticationUtils)
     {
@@ -32,11 +33,20 @@ class SecurityController extends Controller
     }
 
     /**
-     * @Route("/logout"))
+     * @Route("/logout", name="logout")
      */
     public function logoutAction(){
-        return null;
+        return $this->render('@App/Security/logout.html.twig', array(
+        ));
     }
+
+    /**
+     * @Route("/register", name="register")
+     */
+    public function registerAction(){
+
+    }
+
 
 
 }

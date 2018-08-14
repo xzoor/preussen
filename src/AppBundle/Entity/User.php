@@ -5,6 +5,8 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\Encoder\BCryptPasswordEncoder;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
 
 
 /**
@@ -12,6 +14,11 @@ use Symfony\Component\Security\Core\Encoder\BCryptPasswordEncoder;
  *
  * @ORM\Table(name="user")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\UserRepository")
+ * @UniqueEntity(
+ *     fields={"username"},
+ *     errorPath="username",
+ *     message="Este usuario se encuentra registrado."
+ * )
  */
 class User implements UserInterface
 {
@@ -178,8 +185,9 @@ class User implements UserInterface
      */
     public function setFechaCreacion($fechaCreacion)
     {
-        $this->fechaCreacion = $fechaCreacion;
-
+        if(!$this->fechaCreacion){
+            $this->fechaCreacion = new \DateTime();
+        }
         return $this;
     }
 

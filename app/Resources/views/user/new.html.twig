@@ -1,16 +1,90 @@
-{% extends 'base.html.twig' %}
 
+<!DOCTYPE html>
+<html>
+<head>
+
+
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script
+            src="https://code.jquery.com/jquery-2.1.1.min.js"
+            integrity="sha256-h0cGsrExGgcZtSZ/fRz4AwV+Nn6Urh/3v3jFRQ0w9dQ="
+            crossorigin="anonymous"></script>
+    <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="https://preussenmoney.com/wp-content/uploads/2017/02/favicon.png">
+
+    <title>Preussen</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="../../dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <link href="../../assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="navbar.css" rel="stylesheet">
+
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <script src="../../assets/js/ie-emulation-modes-warning.js"></script>
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]> -->
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+</head>
+<body>
 {% block body %}
-    <h1>User creation</h1>
+    <div class="container-fluid">
+        <div class="col-md-12" style="background-color:#ffffff;">
+            <div class="modal-dialog">
+                <div class="modal-content" style="background-color:#7ec441 ">
+                    <div class="panel-heading" >
+                        <div class="row-fluid user-row">
+                            <img src="{{ asset('logo-nuevo-1.png') }}" class="img-responsive" alt="Conxole Admin"/>
+                        </div>
+                    </div>
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Registrarse</h3>
+                    </div>
+                    <div class="panel-body">
+                        <form action="{{ path('user_new') }}"  method="post">
+                            {% if form_errors(form.username)%}
+                                <div class="alert alert-warning" role="alert">{{ form_errors(form.username) }}</div>
+                            {% endif %}
+                            <fieldset>
+                                <div class="form-group">
+                                    <input class="form-control" placeholder="Correo" name="appbundle_user[username]" type="email" autofocus="" value="" id="appbundle_user_username" required="required">
+                                </div>
+                                <div class="form-group">
+                                    <input class="form-control" placeholder="Contraseña" name="appbundle_user[password]" type="text" value="" id="appbundle_user_password">
+                                </div>
 
-    {{ form_start(form) }}
-        {{ form_widget(form) }}
-        <input type="submit" value="Create" />
-    {{ form_end(form) }}
+                                {{ form_row(form._token) }}
 
-    <ul>
-        <li>
-            <a href="{{ path('user_index') }}">Back to the list</a>
-        </li>
-    </ul>
+                                <button type="submit" class="btn btn-sm btn-primary">Registrar</button>
+                                {#<a href="javascript:;" class="btn btn-sm btn-success">Login</a>#}
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr>
+
+    </div>
+    </div>
 {% endblock %}
+
+</body>
+</html>
