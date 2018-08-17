@@ -177,11 +177,16 @@ Licensed under MIT
                     <!-- END SIDEBAR BUTTONS -->
                     <!-- SIDEBAR MENU -->
                     <div class="list-group-item">
-
+                        {% if is_granted('ROLE_ADMIN') %}
+                            <a href="{{ path('user_index') }}" class="list-group-item list-group-item-action"><i class="fas fa-user"></i>  Usuarios</a>
+                        {% endif %}
+                        {% if is_granted('ROLE_USUARIO') %}
                         <a href="#" class="list-group-item list-group-item-action"><i class="fas fa-suitcase"></i>  Mi Cuenta</a>
                         <a href="#" class="list-group-item list-group-item-action"><i class="fas fa-file-signature"></i>  Datos Personales</a>
                         <a href="#" class="list-group-item list-group-item-action"><i class="fas fa-id-card"></i>  Documentacion</a>
                         <a href="#" class="list-group-item list-group-item-action"><i class="fas fa-question-circle"></i> Ayuda</a>
+                        {% endif %}
+
 
                     </div>
                     <!-- END MENU -->
@@ -189,7 +194,14 @@ Licensed under MIT
             </div>
             <div class="col-md-9">
                 <div class="modal-content">
+                    {% if is_granted('ROLE_USER') %}
                     {% include '@App/Usuario/balance.html.twig' %}
+                    {% endif %}
+                    {% if is_granted('ROLE_ADMIN') %}
+                        {{ render(controller(
+                            'AppBundle:User:index'
+                        )) }}
+                    {% endif %}
                 </div>
             </div>
         </div>
